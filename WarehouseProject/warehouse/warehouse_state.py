@@ -32,10 +32,12 @@ class WarehouseState(State[Action]):
         pass
 
     def can_move_right(self) -> bool:
-        return self.column_forklift < self.columns - 1 and self.matrix[self.line_forklift][self.column_forklift + 1] != constants.SHELF
+        return self.column_forklift < self.columns - 1 and self.matrix[self.line_forklift][
+            self.column_forklift + 1] != constants.SHELF
 
     def can_move_down(self) -> bool:
-        return self.line_forklift < self.rows - 1 and self.matrix[self.line_forklift + 1][self.column_forklift] != constants.SHELF
+        return self.line_forklift < self.rows - 1 and self.matrix[self.line_forklift + 1][
+            self.column_forklift] != constants.SHELF
 
     def can_move_left(self) -> bool:
         return self.column_forklift > 0 and self.matrix[self.line_forklift][self.column_forklift - 1] != constants.SHELF
@@ -63,6 +65,15 @@ class WarehouseState(State[Action]):
             self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
             self.column_forklift -= 1
             self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
+
+    def cell_has_product(self, x, y):
+        return self.matrix[x][y] == constants.PRODUCT
+
+    def cell_is_empty(self, x, y):
+        return self.matrix[x][y] == constants.EMPTY
+
+    def remove_product(self, x, y):
+        self.matrix[x][y] = constants.PRODUCT_CATCH
 
     def get_cell_color(self, row: int, column: int) -> Color:
         if row == self.line_exit and column == self.column_exit and (
