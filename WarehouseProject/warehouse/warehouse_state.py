@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 from PIL.ImageEnhance import Color
 from numpy import ndarray
@@ -28,36 +30,60 @@ class WarehouseState(State[Action]):
                     self.column_exit = j
 
     def can_move_up(self) -> bool:
-        # TODO
-        pass
+        return self.line_forklift > 0 and \
+            self.matrix[self.line_forklift - 1][self.column_forklift] != constants.SHELF or \
+            self.matrix[self.line_forklift - 1][self.column_forklift] != constants.PRODUCT or \
+            self.matrix[self.line_forklift - 1][self.column_forklift] != constants.PRODUCT_CATCH
 
     def can_move_right(self) -> bool:
-        # TODO
-        pass
+        return self.column_forklift < self.columns - 1 and \
+            self.matrix[self.line_forklift][self.column_forklift + 1] != constants.SHELF or \
+            self.matrix[self.line_forklift][self.column_forklift + 1] != constants.PRODUCT or \
+            self.matrix[self.line_forklift][self.column_forklift + 1] != constants.PRODUCT_CATCH
 
     def can_move_down(self) -> bool:
-        # TODO
-        pass
+        return self.line_forklift < self.rows - 1 and \
+            self.matrix[self.line_forklift + 1][self.column_forklift] != constants.SHELF or \
+            self.matrix[self.line_forklift + 1][self.column_forklift] != constants.PRODUCT or \
+            self.matrix[self.line_forklift + 1][self.column_forklift] != constants.PRODUCT_CATCH
 
     def can_move_left(self) -> bool:
-        # TODO
-        pass
+        return self.column_forklift > 0 and \
+            self.matrix[self.line_forklift][self.column_forklift - 1] != constants.SHELF or \
+            self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT or \
+            self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT_CATCH
 
     def move_up(self) -> None:
-        # TODO
-        pass
+        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
+        self.line_forklift -= 1
+        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_right(self) -> None:
-        # TODO
-        pass
+        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
+        self.column_forklift += 1
+        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_down(self) -> None:
-        # TODO
-        pass
+        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
+        self.line_forklift += 1
+        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_left(self) -> None:
-        # TODO
-        pass
+        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
+        self.column_forklift -= 1
+        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
+
+    def cell_has_product(self, x, y):
+        return self.matrix[x][y] == constants.PRODUCT
+
+    def cell_is_empty(self, x, y):
+        return self.matrix[x][y] == constants.EMPTY
+
+    def catch_product(self, x, y):
+        self.matrix[x][y] = constants.PRODUCT_CATCH
+
+    #def euclidean_distance(self, x1, y1, x2, y2):
+    #   return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
 
     def get_cell_color(self, row: int, column: int) -> Color:
         if row == self.line_exit and column == self.column_exit and (

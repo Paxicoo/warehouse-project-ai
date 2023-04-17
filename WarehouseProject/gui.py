@@ -619,6 +619,21 @@ class SearchSolver(threading.Thread):
 
     def run(self):
         # TODO calculate pairs distances
+        # calcular os pares
+
+        # para cada par, definir
+        # criar uma instancia da classe problemForSearch
+        # enviar no initialState o agente e o goal corretamente iniciados
+        #Problem(intiailState, goal_position (a maior parte das vezes e a celula 2 se for porta)
+        # se for produto é cell 2 + 1 ou cell 2 - 1 (depende do sitio do produto)
+
+        # par tem a Cell1 e Cell2, o initial State tem o agente na Cell 1, o goal é a Cell 2 (se for a porta)
+
+
+
+        # cada par tem um goal diferente, e vai ter um estado inicial diferente
+
+        # tambem tenho a distancia a porta (isso e em cima da porta)
 
         self.agent.search_method.stopped=True
         self.gui.problem_ga = WarehouseProblemGA(self.agent)
