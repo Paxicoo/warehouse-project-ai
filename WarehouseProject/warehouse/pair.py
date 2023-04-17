@@ -5,6 +5,8 @@ class Pair:
         self.value = 0
         # TODO?
 
+        # nao é pra ja
+
     def hash(self):
         return str(self.cell1.line) + "_" + str(self.cell1.column) + "_" + str(
             self.cell2.line) + "_" + str(self.cell2.column)

@@ -54,28 +54,24 @@ class WarehouseState(State[Action]):
             self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT_CATCH
 
     def move_up(self) -> None:
-        if self.can_move_up():
-            self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
-            self.line_forklift -= 1
-            self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
+        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
+        self.line_forklift -= 1
+        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_right(self) -> None:
-        if self.can_move_right():
-            self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
-            self.column_forklift += 1
-            self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
+        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
+        self.column_forklift += 1
+        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_down(self) -> None:
-        if self.can_move_down():
-            self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
-            self.line_forklift += 1
-            self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
+        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
+        self.line_forklift += 1
+        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_left(self) -> None:
-        if self.can_move_left():
-            self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
-            self.column_forklift -= 1
-            self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
+        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
+        self.column_forklift -= 1
+        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def cell_has_product(self, x, y):
         return self.matrix[x][y] == constants.PRODUCT
