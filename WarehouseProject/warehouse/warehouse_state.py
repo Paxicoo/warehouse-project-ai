@@ -31,26 +31,26 @@ class WarehouseState(State[Action]):
 
     def can_move_up(self) -> bool:
         return self.line_forklift > 0 and \
-            self.matrix[self.line_forklift - 1][self.column_forklift] != constants.SHELF or \
-            self.matrix[self.line_forklift - 1][self.column_forklift] != constants.PRODUCT or \
+            self.matrix[self.line_forklift - 1][self.column_forklift] != constants.SHELF and \
+            self.matrix[self.line_forklift - 1][self.column_forklift] != constants.PRODUCT and \
             self.matrix[self.line_forklift - 1][self.column_forklift] != constants.PRODUCT_CATCH
 
     def can_move_right(self) -> bool:
         return self.column_forklift < self.columns - 1 and \
-            self.matrix[self.line_forklift][self.column_forklift + 1] != constants.SHELF or \
-            self.matrix[self.line_forklift][self.column_forklift + 1] != constants.PRODUCT or \
+            self.matrix[self.line_forklift][self.column_forklift + 1] != constants.SHELF and \
+            self.matrix[self.line_forklift][self.column_forklift + 1] != constants.PRODUCT and \
             self.matrix[self.line_forklift][self.column_forklift + 1] != constants.PRODUCT_CATCH
 
     def can_move_down(self) -> bool:
         return self.line_forklift < self.rows - 1 and \
-            self.matrix[self.line_forklift + 1][self.column_forklift] != constants.SHELF or \
-            self.matrix[self.line_forklift + 1][self.column_forklift] != constants.PRODUCT or \
+            self.matrix[self.line_forklift + 1][self.column_forklift] != constants.SHELF and \
+            self.matrix[self.line_forklift + 1][self.column_forklift] != constants.PRODUCT and \
             self.matrix[self.line_forklift + 1][self.column_forklift] != constants.PRODUCT_CATCH
 
     def can_move_left(self) -> bool:
         return self.column_forklift > 0 and \
-            self.matrix[self.line_forklift][self.column_forklift - 1] != constants.SHELF or \
-            self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT or \
+            self.matrix[self.line_forklift][self.column_forklift - 1] != constants.SHELF and \
+            self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT and \
             self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT_CATCH
 
     def move_up(self) -> None:
