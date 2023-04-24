@@ -673,7 +673,9 @@ class SearchSolver(threading.Thread):
         # cell2 = Cell (copy of p.cell2)
 
         # se fosse do agente à porta era muito simples, bastava fazer isto
-        # self.agent.initial_environment.setAgent(cell1)
+        # self.agent.initial_environment.line_forklift=cell1.line
+        # self.agent.initial_environment.column_forklift=cell1.column
+
         # faz se uma copia para nao alterar o ambiente inicial
         # state = copy of self.agent.initial_environment
 

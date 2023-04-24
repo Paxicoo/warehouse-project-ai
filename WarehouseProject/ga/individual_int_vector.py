@@ -9,6 +9,8 @@ class IntVectorIndividual(Individual):
         super().__init__(problem, num_genes)
         # TODO
 
+        # criar invidivuos com valores aleatores entre 1 e 20 (20 produtos)
+
         # depois disso, antes de tudo é criar os individuos
         # preencher o genoma na classe individual
 
