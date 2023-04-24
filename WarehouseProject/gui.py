@@ -635,6 +635,70 @@ class SearchSolver(threading.Thread):
 
         # tambem tenho a distancia a porta (isso e em cima da porta)
 
+        # primeiro vamos tentar resolver UM PAR
+        # p = agent.pairs[0] --> primeiro par, corresponde do agente ao primeiro produto
+        # primeiro par é 4-4 / 1-4 cell1.linha = 4 , cell1.coluna = 4, cell2.linha = 1, cell2.coluna = 4
+        # o agente ja tem o initial environment (é um state)
+
+        # posicionar o agente na celula1 (cell1) !!!!
+        # posicionar a forklift na cell1
+
+
+        # problem = warehouseProblemSearch (initialenvironment, goalposition)
+
+        # o goalposition não é o produto em si, mas sim a célula ao lado (esquerda ou direita)
+        # verificar na matriz do initial environment, se ao lado esquerdo do produto está vazio,
+        # se não estiver, então o agente tem que estar no lado direito
+
+        # se verificarmos que a celula 1 é um agente, vamos posicionar lá o agente
+
+        # se o goal_position for uma porta, é direto... se for um produto o goal_position é +1 ou -1 do produto
+
+        # solution = agent.solve_problem(problem) --> o problem já foi definido, é o goal
+
+        # p (pair) p.value = s.cost (s de solution)
+
+        # temos de fazer um for para percorrer todos os pares (calcular o custo) e fazer genérico
+        # ou seja, depende se goal é porta ou produto
+
+        # vamos agora recapitular o que é preciso para calcular um par (só depois disso calcula-se os outros pares)
+
+        # neste nesta classe recebemos o agente, entao podemos logo fazer
+        # p = self.agent.pairs[0] --> primeiro par, se funcionar fazemos um ciclo for para todos os pares
+
+        # depois de buscar o par, vamos buscar a celula 1 do par
+        # cell1 = Cell (copy of p.cell1) --> fazer import
+
+        #agora vamos buscar a celula 2
+        # cell2 = Cell (copy of p.cell2)
+
+        # se fosse do agente à porta era muito simples, bastava fazer isto
+        # self.agent.initial_environment.setAgent(cell1)
+        # faz se uma copia para nao alterar o ambiente inicial
+        # state = copy of self.agent.initial_environment
+
+        # tem que se alterar as coordenadas da cell1 se for diferente de um agent
+        # (se for produto, cell1 é esquerda ou direita, o que tiver livre ao lado do produto)
+
+
+        # agora vamos definir o problema
+        # problem = WarehouseProblemSearch(state, cell2)
+        # nao esquecendo que temos de alterar as coordenadas da cell2 se for diferente da porta
+
+        # agora fazemos
+        # solution = self.agent.solve_problem(problem)
+
+        # no final
+        # (p de pair) p.value = solution.cost
+
+        #depois deve tar num ciclo para fazer com todos os pares
+
+        # depois mostrar os dados na parte gráfica, tens que se ir a
+        # self.text_problem.insert(tk.END, self.agent);
+        # ver as linhas 273 (nao mostrar o state, apenas o agente)
+
+
+
         self.agent.search_method.stopped=True
         self.gui.problem_ga = WarehouseProblemGA(self.agent)
         self.gui.manage_buttons(data_set=tk.NORMAL, runSearch=tk.DISABLED, runGA=tk.NORMAL, stop=tk.DISABLED,
