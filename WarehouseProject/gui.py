@@ -22,6 +22,8 @@ from warehouse.warehouse_agent_search import WarehouseAgentSearch, read_state_fr
 from warehouse.warehouse_experiments_factory import WarehouseExperimentsFactory
 from warehouse.warehouse_problemforGA import WarehouseProblemGA
 from warehouse.warehouse_state import WarehouseState
+from warehouse.warehouse_problemforSearch import WarehouseProblemSearch
+from warehouse.cell import Cell
 
 matplotlib.use("TkAgg")
 
@@ -699,6 +701,49 @@ class SearchSolver(threading.Thread):
         # self.text_problem.insert(tk.END, self.agent);
         # ver as linhas 273 (nao mostrar o state, apenas o agente)
 
+        # depois de resolver todos os pares, temos de fazer o GA
+
+        # Iterar por todos os pares
+        for pair in self.agent.pairs:
+            # Fazer uma cópia das células do par
+            cell1 = copy.copy(pair.cell1)
+            cell2 = copy.copy(pair.cell2)
+
+            # Atualizar o estado inicial com a posição da forklift na cell1
+            state = copy.copy(self.agent.initial_environment)
+
+            # Verificar se a cell1 é um produto, e ajustar a posição do agente se necessário
+            cell1_content = state.matrix[cell1.line][cell1.column]
+            if cell1_content == 2:
+                if state.matrix[cell1.line][cell1.column - 1] == 0:
+                    state.line_forklift = cell1.line
+                    state.column_forklift = cell1.column - 1
+                else:
+                    state.line_forklift = cell1.line
+                    state.column_forklift = cell1.column + 1
+            else:
+                state.line_forklift = cell1.line
+                state.column_forklift = cell1.column
+
+            # Verificar se o goal é um produto, e ajustar a posição da cell2 se necessário
+            cell2_content = state.matrix[cell2.line][cell2.column]
+            if cell2_content == 2:
+                if state.matrix[cell2.line][cell2.column - 1] == 0:
+                    cell2.column -= 1
+                else:
+                    cell2.column += 1
+
+            # Criar uma instância da classe WarehouseProblemSearch com o estado inicial atualizado e a posição da porta
+            problem = WarehouseProblemSearch(state, cell2)
+
+            # Resolver o problema
+            solution = self.agent.solve_problem(problem)
+
+            # Atualizar a distância do par
+            pair.distance = solution.cost
+
+            # Imprimir a distância para debugging
+            print(f"Distance for pair {pair}: {pair.distance}")
 
 
         self.agent.search_method.stopped=True
