@@ -7,6 +7,7 @@ from numpy import ndarray
 import constants
 from agentsearch.state import State
 from agentsearch.action import Action
+from warehouse.cell import Cell
 
 
 class WarehouseState(State[Action]):
@@ -81,6 +82,12 @@ class WarehouseState(State[Action]):
 
     def catch_product(self, x, y):
         self.matrix[x][y] = constants.PRODUCT_CATCH
+
+    def get_forklift_cell(self):
+        return Cell(self.line_forklift, self.column_forklift)
+
+    def get_exit_cell(self):
+        return Cell(self.line_exit, self.column_exit)
 
     #def euclidean_distance(self, x1, y1, x2, y2):
     #   return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)

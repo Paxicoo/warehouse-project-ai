@@ -8,12 +8,64 @@ class WarehouseIndividual(IntVectorIndividual):
 
     def compute_fitness(self) -> float:
         # TODO
-        
-        return 0
+        # o fitness é a soma dos custos de cada par do genoma
+        # o genoma é um array de inteiros, que representa a ordem pela qual o agente vai passar pelas celulas
+
+        # na solução do algoritmo genético, vejo onde está o par (cell1 é o agent, cell2 é o inteiro do genoma)
+        # por exemplo, no indivíduo: 1-2-3 calcula-se do agente ao produto 1, do produto 1 ao 2, do 2 ao 3, e do 3 à porta
+
+        # depois, soma-se os custos de cada par
+        # o fitness é a soma dos custos de cada par
+
+        # fazer print do fitness para ver se está tudo bem
+        # print(self.fitness)
+
+        self.fitness = 0
+        agent_search = self.problem.agent_search
+
+        # Calcular a distância do agente ao primeiro produto no genoma
+        agent_cell = agent_search.initial_environment.get_forklift_cell()
+        first_product_cell = agent_search.products[self.genome[0]]
+        distance_agent_to_first_product = agent_search.distances.get(((agent_cell.line, agent_cell.column),
+                                                                      (first_product_cell.line, first_product_cell.column)),
+                                                                     float('inf'))
+        self.fitness += distance_agent_to_first_product
+
+        # Calcular a distância para cada par de produtos adjacentes no genoma
+        for i, product1_index in enumerate(self.genome[:-1]):
+            product1_cell = agent_search.products[product1_index - 1]
+            product2_cell = agent_search.products[self.genome[i - 1]]
+            distance = agent_search.distances.get(((product1_cell.line, product1_cell.column),
+                                                   (product2_cell.line, product2_cell.column)), float('inf'))
+            self.fitness += distance
+
+        # Calcular a distância do último produto no genoma à porta
+        last_product_cell = agent_search.products[self.genome[-1]]
+        exit_cell = agent_search.initial_environment.get_exit_cell()
+        distance_last_product_to_exit = agent_search.distances.get(((last_product_cell.line, last_product_cell.column),
+                                                                    (exit_cell.line, exit_cell.column), float('inf')))
+        if distance_last_product_to_exit is not None:
+            self.fitness += distance_last_product_to_exit
+
+        # Printar a fitness para ver se está tudo bem
+        print(f"Fitness: {self.fitness}")
+
+        return self.fitness
 
     def obtain_all_path(self):
         # TODO
+
+        # celulas todas que cada agente tem de percorrer (é uma matriz de agentes com celulas)
+
+        # ou seja, basicamente isto é so para a interface gráfica, para mostrar o caminho que cada agente faz
+
+        # steps é o numero maximo de passos que o agente pode dar
+
+        # forklift_path é a matriz de celulas que cada linha representa as celulas que cada agente corre
+        # se houver so um agente é um array, mas para ser generico criamos a matriz de dimensao por numero de agentes
         pass
+
+
 
     def __str__(self):
         string = 'Fitness: ' + f'{self.fitness}' + '\n'
