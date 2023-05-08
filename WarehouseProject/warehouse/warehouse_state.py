@@ -18,17 +18,9 @@ class WarehouseState(State[Action]):
 
         self.rows = rows
         self.columns = columns
-        self.matrix = np.full([self.rows, self.columns], fill_value=0, dtype=int)
-
-        for i in range(self.rows):
-            for j in range(self.columns):
-                self.matrix[i][j] = matrix[i][j]
-                if self.matrix[i][j] == constants.FORKLIFT:
-                    self.line_forklift = i
-                    self.column_forklift = j
-                if self.matrix[i][j] == constants.EXIT:
-                    self.line_exit = i
-                    self.column_exit = j
+        self.matrix = matrix
+        self.line_forklift = -1
+        self.column_forklift = -1
 
     def can_move_up(self) -> bool:
         return self.line_forklift > 0 and \
@@ -83,18 +75,8 @@ class WarehouseState(State[Action]):
     def catch_product(self, x, y):
         self.matrix[x][y] = constants.PRODUCT_CATCH
 
-    def get_forklift_cell(self):
-        return Cell(self.line_forklift, self.column_forklift)
-
-    def get_exit_cell(self):
-        return Cell(self.line_exit, self.column_exit)
-
-    #def euclidean_distance(self, x1, y1, x2, y2):
-    #   return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
-
     def get_cell_color(self, row: int, column: int) -> Color:
-        if row == self.line_exit and column == self.column_exit and (
-                row != self.line_forklift or column != self.column_forklift):
+        if self.matrix[row][column] == constants.EXIT:
             return constants.COLOREXIT
 
         if self.matrix[row][column] == constants.PRODUCT_CATCH:

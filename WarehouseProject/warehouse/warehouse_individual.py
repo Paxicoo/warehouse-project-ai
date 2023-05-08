@@ -2,7 +2,7 @@ from ga.individual_int_vector import IntVectorIndividual
 
 class WarehouseIndividual(IntVectorIndividual):
 
-    def __init__(self, problem: "WarehouseProblem", num_genes: int):
+    def __init__(self, problem: "WarehouseProblemGA", num_genes: int):
         super().__init__(problem, num_genes)
         # TODO
 
@@ -20,32 +20,46 @@ class WarehouseIndividual(IntVectorIndividual):
         # fazer print do fitness para ver se está tudo bem
         # print(self.fitness)
 
+        # TODO FAZER PARA VÁRIOS AGENTES
+
+        print("Genome: ", self.genome)
         self.fitness = 0
         agent_search = self.problem.agent_search
 
         # Calcular a distância do agente ao primeiro produto no genoma
-        agent_cell = agent_search.initial_environment.get_forklift_cell()
-        first_product_cell = agent_search.products[self.genome[0]]
+        agent_cell = agent_search.forklifts[0]
+        first_product_cell = agent_search.products[self.genome[0] - 1]
         distance_agent_to_first_product = agent_search.distances.get(((agent_cell.line, agent_cell.column),
                                                                       (first_product_cell.line, first_product_cell.column)),
                                                                      float('inf'))
+        print("Distance agent to first product: ", distance_agent_to_first_product)
         self.fitness += distance_agent_to_first_product
 
         # Calcular a distância para cada par de produtos adjacentes no genoma
         for i, product1_index in enumerate(self.genome[:-1]):
             product1_cell = agent_search.products[product1_index - 1]
-            product2_cell = agent_search.products[self.genome[i - 1]]
+            product2_cell = agent_search.products[self.genome[i + 1]-1]
             distance = agent_search.distances.get(((product1_cell.line, product1_cell.column),
                                                    (product2_cell.line, product2_cell.column)), float('inf'))
+
+            print(f"Distance product {product1_cell} to product {product2_cell}: ", distance)
+            # if distance is infinite
+            if distance == float('inf'):
+                distance = agent_search.distances.get(((product2_cell.line, product2_cell.column),
+                                                       (product1_cell.line, product1_cell.column)), float('inf'))
+                print(f"Distance product {product2_cell} to product {product1_cell}: ", distance)
+
             self.fitness += distance
 
         # Calcular a distância do último produto no genoma à porta
-        last_product_cell = agent_search.products[self.genome[-1]]
-        exit_cell = agent_search.initial_environment.get_exit_cell()
+        last_product_cell = agent_search.products[self.genome[-1] - 1]
+        print("Last product cell: ", last_product_cell)
+        exit_cell = self.problem.agent_search.exit
         distance_last_product_to_exit = agent_search.distances.get(((last_product_cell.line, last_product_cell.column),
                                                                     (exit_cell.line, exit_cell.column), float('inf')))
-        if distance_last_product_to_exit is not None:
-            self.fitness += distance_last_product_to_exit
+        print("Distance last product to exit: ", distance_last_product_to_exit)
+        print(f"Distance product {last_product_cell} to product {exit_cell}: ", distance_last_product_to_exit)
+        self.fitness += distance_last_product_to_exit
 
         # Printar a fitness para ver se está tudo bem
         print(f"Fitness: {self.fitness}")
@@ -63,6 +77,17 @@ class WarehouseIndividual(IntVectorIndividual):
 
         # forklift_path é a matriz de celulas que cada linha representa as celulas que cada agente corre
         # se houver so um agente é um array, mas para ser generico criamos a matriz de dimensao por numero de agentes
+
+        # tens que obter as celulas todas que cada par
+
+        # guardar em cada par as cells que cada um percorrey
+
+        #adaptar a class solution (gui) devolver as celulas percorridas por uma solução
+        #depois guardar em cada par essas celulas, depois aqui consoante a solução, temos o genoma
+        #vamos buscar as celulas todas para concatenar e depois devolver o caminho todo
+        # tem que dar return do caminho todo, para depois na gui desenhar o caminho todo
+
+
         pass
 
 

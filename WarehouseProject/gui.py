@@ -268,6 +268,7 @@ class Window(tk.Tk):
         filename = fd.askopenfilename(initialdir='/data_sets', title='Select a problem')
         if filename:
             matrix, num_rows, num_columns = read_state_from_txt_file(filename)
+            # matrix = [[int(j) for j in i] for i in matrix]
             self.initial_state = WarehouseState(matrix, num_rows, num_columns)
             self.agent_search = WarehouseAgentSearch(WarehouseState(matrix, num_rows, num_columns))
             self.solution = None
@@ -706,7 +707,7 @@ class SearchSolver(threading.Thread):
             # Verificar se a cell1 é um produto, e ajustar a posição do agente se necessário
             cell1_content = state.matrix[cell1.line][cell1.column]
             if cell1_content == 2:
-                if state.matrix[cell1.line][cell1.column - 1] == 0:
+                if cell1.column != 0 and state.matrix[cell1.line][cell1.column - 1] == 0:
                     state.line_forklift = cell1.line
                     state.column_forklift = cell1.column - 1
                 else:
@@ -719,7 +720,7 @@ class SearchSolver(threading.Thread):
             # Verificar se o goal é um produto, e ajustar a posição da cell2 se necessário
             cell2_content = state.matrix[cell2.line][cell2.column]
             if cell2_content == 2:
-                if state.matrix[cell2.line][cell2.column - 1] == 0:
+                if cell2.column != 0 and state.matrix[cell2.line][cell2.column - 1] == 0:
                     cell2.column -= 1
                 else:
                     cell2.column += 1
