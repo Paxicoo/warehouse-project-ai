@@ -268,7 +268,6 @@ class Window(tk.Tk):
         filename = fd.askopenfilename(initialdir='/data_sets', title='Select a problem')
         if filename:
             matrix, num_rows, num_columns = read_state_from_txt_file(filename)
-            # matrix = [[int(j) for j in i] for i in matrix]
             self.initial_state = WarehouseState(matrix, num_rows, num_columns)
             self.agent_search = WarehouseAgentSearch(WarehouseState(matrix, num_rows, num_columns))
             self.solution = None

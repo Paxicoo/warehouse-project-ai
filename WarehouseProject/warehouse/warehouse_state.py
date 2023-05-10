@@ -18,7 +18,9 @@ class WarehouseState(State[Action]):
 
         self.rows = rows
         self.columns = columns
-        self.matrix = matrix
+        #self.matrix = matrix
+        self.matrix = np.array(matrix, dtype=np.int32)
+
         self.line_forklift = -1
         self.column_forklift = -1
 
