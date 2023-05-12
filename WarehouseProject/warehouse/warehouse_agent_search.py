@@ -22,6 +22,7 @@ class WarehouseAgentSearch(Agent):
         self.exit = None
         self.pairs = []
         self.distances = {} # dicionário de distâncias entre pares de células
+        self.paths = {} # dicionário de caminhos
         for i in range(environment.rows):
             for j in range(environment.columns):
                 if environment.matrix[i][j] == constants.FORKLIFT:

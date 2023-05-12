@@ -49,24 +49,16 @@ class WarehouseState(State[Action]):
             self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT_CATCH
 
     def move_up(self) -> None:
-        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
         self.line_forklift -= 1
-        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_right(self) -> None:
-        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
         self.column_forklift += 1
-        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_down(self) -> None:
-        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
         self.line_forklift += 1
-        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_left(self) -> None:
-        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
         self.column_forklift -= 1
-        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def cell_has_product(self, x, y):
         return self.matrix[x][y] == constants.PRODUCT
@@ -104,7 +96,8 @@ class WarehouseState(State[Action]):
 
     def __eq__(self, other):
         if isinstance(other, WarehouseState):
-            return np.array_equal(self.matrix, other.matrix)
+            return self.line_forklift == other.line_forklift and \
+                self.column_forklift == other.column_forklift
         return NotImplemented
 
     def __hash__(self):

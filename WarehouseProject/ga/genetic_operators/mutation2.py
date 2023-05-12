@@ -7,6 +7,7 @@ class Mutation2(Mutation):
 
     def mutate(self, ind: IntVectorIndividual) -> None:
         # TODO
+        # cross-over and mutation operators for permutation representation
         pass
 
     def __str__(self):

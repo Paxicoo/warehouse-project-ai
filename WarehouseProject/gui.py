@@ -18,6 +18,7 @@ from ga.genetic_operators.recombination2 import Recombination2
 from ga.genetic_operators.recombination_pmx import RecombinationPMX
 from ga.genetic_operators.mutation_insert import MutationInsert
 from ga.genetic_algorithm_thread import GeneticAlgorithmThread
+from warehouse.cell import Cell
 from warehouse.warehouse_agent_search import WarehouseAgentSearch, read_state_from_txt_file
 from warehouse.warehouse_experiments_factory import WarehouseExperimentsFactory
 from warehouse.warehouse_problemforGA import WarehouseProblemGA
@@ -736,6 +737,10 @@ class SearchSolver(threading.Thread):
             # Adicionar a distância ao dicionário de distâncias usando as coordenadas das células
             self.agent.distances[((pair.cell1.line, pair.cell1.column), (pair.cell2.line, pair.cell2.column))] = solution.cost
 
+            self.agent.paths[((pair.cell1.line, pair.cell1.column), (pair.cell2.line, pair.cell2.column))] = solution.obtain_all_path()
+
+            pair.solution = solution
+
             # Imprimir a distância para debugging
             print(f"Distance for pair {pair}")
 
@@ -783,5 +788,7 @@ class SolutionRunner(threading.Thread):
                     self.state.matrix[old_cell[j].line][old_cell[j].column] = constants.FORKLIFT
 
                 # TODO put the catched products in black
+                # basicamente, contabilizar em que step é que ele apanha cada um dos produtos
+                # se tivesse nesse step, ficava a preto
             self.gui.queue.put((copy.deepcopy(self.state), step, False))
         self.gui.queue.put((None, steps, True))  # Done
