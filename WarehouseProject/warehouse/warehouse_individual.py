@@ -37,10 +37,14 @@ class WarehouseIndividual(IntVectorIndividual):
         # Dicionário de distâncias entre células para cada agente
         distances = [0 for _ in range(len(agent_search.forklifts))]
 
-        # TODO perguntar como colocar peso1 e peso2 no gui
         # TODO perguntar quais os pesos ideais e como saber se o fitness está bom
-        peso1 = 0.5
-        peso2 = 0.5
+        # TODO perguntar como colocar peso1 e peso2 no gui
+        # TODO perguntar se o quadrado da saída é suposto deixar de ser azul quando um agente passa por lá
+        # TODO perguntar dicas de como penalizar o fitness quando há colisão de agentes
+        # TODO perguntar dicas de como por os produtos a preto quando são apanhados
+        # TODO perguntar extras para além dos que estão no enunciado
+        pesoDistTotal = 0.5
+        pesoDistMax = 0.5
 
         # Vamos percorrer o genoma
         for i, genome_value in enumerate(self.genome):
@@ -109,7 +113,7 @@ class WarehouseIndividual(IntVectorIndividual):
         max_distance = max(distances)
         print("Max distance: ",max_distance)
         # Calcular o fitness
-        self.fitness = peso1 * total_distance + peso2 * max_distance
+        self.fitness = pesoDistTotal * total_distance + pesoDistMax * max_distance
         print("Fitness: ",self.fitness)
         print("=====================================")
         return self.fitness
@@ -132,8 +136,8 @@ class WarehouseIndividual(IntVectorIndividual):
 
         # adaptar a class solution (gui) devolver as celulas percorridas por uma solução
         # depois guardar em cada par essas celulas, depois aqui consoante a solução, temos o genoma
-        # vamos buscar as celulas todas para concatenar e depois devolver o caminho todo
-        # tem que dar return do caminho todo, para depois na gui desenhar o caminho todo
+        # vamos buscar as celulas todas para concatenar e depois devolver o caminho total
+        # tem que dar return do caminho total, para depois na gui desenhar o caminho todo
 
         agent_search = self.problem.agent_search
         product_count = len(agent_search.products)
@@ -228,9 +232,8 @@ class WarehouseIndividual(IntVectorIndividual):
             forklift_paths.append(path_agent_to_exit)
             if len(path) > max_steps:
                 max_steps = len(path)
-        # TODO perguntar se é suposto reduzir um valor ao max_steps (porque o max_steps dava 1 a mais do que o esperado)
-        # TODO perguntar se o quadrado da saída é suposto deixar de ser azul quando um agente passa por lá
-        print(max_steps - 1)
+
+        print(max_steps)
         return forklift_paths, max_steps
 
     def __str__(self):

@@ -117,7 +117,7 @@ class Window(tk.Tk):
                                                     anchor="e", width=25)
         self.label_recombination_methods.grid(row=5, column=0)
 
-        recombination_methods = ['PMX', 'Recombination2', 'Recombination3']
+        recombination_methods = ['PMX', 'Cycle Crossover', 'Order Crossover']
 
         self.combo_recombination_methods = ttk.Combobox(master=self.panel_parameters, state="readonly",
                                                         values=recombination_methods, width=14)
@@ -136,7 +136,7 @@ class Window(tk.Tk):
                                                anchor="e", width=25)
         self.label_mutation_methods.grid(row=7, column=0)
 
-        mutation_methods = ['Insert', 'Mutation2', 'Mutation3']
+        mutation_methods = ['Insert', 'Swap', 'Inversion']
 
         self.combo_mutation_methods = ttk.Combobox(master=self.panel_parameters, state="readonly",
                                                    values=mutation_methods, width=14)
