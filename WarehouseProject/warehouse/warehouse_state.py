@@ -7,6 +7,7 @@ from numpy import ndarray
 import constants
 from agentsearch.state import State
 from agentsearch.action import Action
+from warehouse.cell import Cell
 
 
 class WarehouseState(State[Action]):
@@ -17,17 +18,11 @@ class WarehouseState(State[Action]):
 
         self.rows = rows
         self.columns = columns
-        self.matrix = np.full([self.rows, self.columns], fill_value=0, dtype=int)
+        #self.matrix = matrix
+        self.matrix = np.array(matrix, dtype=np.int32)
 
-        for i in range(self.rows):
-            for j in range(self.columns):
-                self.matrix[i][j] = matrix[i][j]
-                if self.matrix[i][j] == constants.FORKLIFT:
-                    self.line_forklift = i
-                    self.column_forklift = j
-                if self.matrix[i][j] == constants.EXIT:
-                    self.line_exit = i
-                    self.column_exit = j
+        self.line_forklift = -1
+        self.column_forklift = -1
 
     def can_move_up(self) -> bool:
         return self.line_forklift > 0 and \
@@ -54,24 +49,16 @@ class WarehouseState(State[Action]):
             self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT_CATCH
 
     def move_up(self) -> None:
-        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
         self.line_forklift -= 1
-        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_right(self) -> None:
-        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
         self.column_forklift += 1
-        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_down(self) -> None:
-        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
         self.line_forklift += 1
-        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def move_left(self) -> None:
-        self.matrix[self.line_forklift][self.column_forklift] = constants.EMPTY
         self.column_forklift -= 1
-        self.matrix[self.line_forklift][self.column_forklift] = constants.FORKLIFT
 
     def cell_has_product(self, x, y):
         return self.matrix[x][y] == constants.PRODUCT
@@ -82,12 +69,8 @@ class WarehouseState(State[Action]):
     def catch_product(self, x, y):
         self.matrix[x][y] = constants.PRODUCT_CATCH
 
-    #def euclidean_distance(self, x1, y1, x2, y2):
-    #   return math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
-
     def get_cell_color(self, row: int, column: int) -> Color:
-        if row == self.line_exit and column == self.column_exit and (
-                row != self.line_forklift or column != self.column_forklift):
+        if self.matrix[row][column] == constants.EXIT:
             return constants.COLOREXIT
 
         if self.matrix[row][column] == constants.PRODUCT_CATCH:
@@ -113,7 +96,8 @@ class WarehouseState(State[Action]):
 
     def __eq__(self, other):
         if isinstance(other, WarehouseState):
-            return np.array_equal(self.matrix, other.matrix)
+            return self.line_forklift == other.line_forklift and \
+                self.column_forklift == other.column_forklift
         return NotImplemented
 
     def __hash__(self):

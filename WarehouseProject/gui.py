@@ -18,12 +18,12 @@ from ga.genetic_operators.recombination2 import Recombination2
 from ga.genetic_operators.recombination_pmx import RecombinationPMX
 from ga.genetic_operators.mutation_insert import MutationInsert
 from ga.genetic_algorithm_thread import GeneticAlgorithmThread
+from warehouse.cell import Cell
 from warehouse.warehouse_agent_search import WarehouseAgentSearch, read_state_from_txt_file
 from warehouse.warehouse_experiments_factory import WarehouseExperimentsFactory
 from warehouse.warehouse_problemforGA import WarehouseProblemGA
 from warehouse.warehouse_state import WarehouseState
 from warehouse.warehouse_problemforSearch import WarehouseProblemSearch
-from warehouse.cell import Cell
 
 matplotlib.use("TkAgg")
 
@@ -117,7 +117,7 @@ class Window(tk.Tk):
                                                     anchor="e", width=25)
         self.label_recombination_methods.grid(row=5, column=0)
 
-        recombination_methods = ['PMX', 'Recombination2', 'Recombination3']
+        recombination_methods = ['PMX', 'Cycle Crossover', 'Order Crossover']
 
         self.combo_recombination_methods = ttk.Combobox(master=self.panel_parameters, state="readonly",
                                                         values=recombination_methods, width=14)
@@ -136,7 +136,7 @@ class Window(tk.Tk):
                                                anchor="e", width=25)
         self.label_mutation_methods.grid(row=7, column=0)
 
-        mutation_methods = ['Insert', 'Mutation2', 'Mutation3']
+        mutation_methods = ['Insert', 'Swap', 'Inversion']
 
         self.combo_mutation_methods = ttk.Combobox(master=self.panel_parameters, state="readonly",
                                                    values=mutation_methods, width=14)
@@ -287,7 +287,7 @@ class Window(tk.Tk):
 
     def runSearch_button_clicked(self):
 
-        self.agent_search.search_method.stopped=False
+        self.agent_search.search_method.stopped = False
 
         self.text_problem.delete("1.0", "end")
 
@@ -371,7 +371,7 @@ class Window(tk.Tk):
             if done:
                 self.queue.queue.clear()
                 self.after_cancel(self.after_id)
-                self.after_id= None
+                self.after_id = None
                 self.solution_runner = None
                 self.manage_buttons(data_set=tk.NORMAL, runSearch=tk.DISABLED, runGA=tk.NORMAL, stop=tk.DISABLED,
                                     open_experiments=tk.NORMAL, run_experiments=tk.DISABLED,
@@ -410,7 +410,6 @@ class Window(tk.Tk):
             self.solver = None
             return
 
-
         if self.solution_runner is not None and self.solution_runner.thread_running:
             self.solution_runner.stop()
             self.queue.queue.clear()
@@ -431,9 +430,6 @@ class Window(tk.Tk):
                                 open_experiments=tk.NORMAL, run_experiments=tk.DISABLED, stop_experiments=tk.DISABLED,
                                 simulation=tk.DISABLED, stop_simulation=tk.DISABLED)
             self.genetic_algorithm = None
-
-
-
 
     def open_experiments_button_clicked(self):
         filename = fd.askopenfilename(initialdir='.')
@@ -626,12 +622,10 @@ class SearchSolver(threading.Thread):
         # para cada par, definir
         # criar uma instancia da classe problemForSearch
         # enviar no initialState o agente e o goal corretamente iniciados
-        #Problem(intiailState, goal_position (a maior parte das vezes e a celula 2 se for porta)
+        # Problem(intiailState, goal_position (a maior parte das vezes e a celula 2 se for porta)
         # se for produto é cell 2 + 1 ou cell 2 - 1 (depende do sitio do produto)
 
         # par tem a Cell1 e Cell2, o initial State tem o agente na Cell 1, o goal é a Cell 2 (se for a porta)
-
-
 
         # cada par tem um goal diferente, e vai ter um estado inicial diferente
 
@@ -644,7 +638,6 @@ class SearchSolver(threading.Thread):
 
         # posicionar o agente na celula1 (cell1) !!!!
         # posicionar a forklift na cell1
-
 
         # problem = warehouseProblemSearch (initialenvironment, goalposition)
 
@@ -671,7 +664,7 @@ class SearchSolver(threading.Thread):
         # depois de buscar o par, vamos buscar a celula 1 do par
         # cell1 = Cell (copy of p.cell1) --> fazer import
 
-        #agora vamos buscar a celula 2
+        # agora vamos buscar a celula 2
         # cell2 = Cell (copy of p.cell2)
 
         # se fosse do agente à porta era muito simples, bastava fazer isto
@@ -684,7 +677,6 @@ class SearchSolver(threading.Thread):
         # tem que se alterar as coordenadas da cell1 se for diferente de um agent
         # (se for produto, cell1 é esquerda ou direita, o que tiver livre ao lado do produto)
 
-
         # agora vamos definir o problema
         # problem = WarehouseProblemSearch(state, cell2)
         # nao esquecendo que temos de alterar as coordenadas da cell2 se for diferente da porta
@@ -695,7 +687,7 @@ class SearchSolver(threading.Thread):
         # no final
         # (p de pair) p.value = solution.cost
 
-        #depois deve tar num ciclo para fazer com todos os pares
+        # depois deve tar num ciclo para fazer com todos os pares
 
         # depois mostrar os dados na parte gráfica, tens que se ir a
         # self.text_problem.insert(tk.END, self.agent);
@@ -715,7 +707,7 @@ class SearchSolver(threading.Thread):
             # Verificar se a cell1 é um produto, e ajustar a posição do agente se necessário
             cell1_content = state.matrix[cell1.line][cell1.column]
             if cell1_content == 2:
-                if state.matrix[cell1.line][cell1.column - 1] == 0:
+                if cell1.column != 0 and state.matrix[cell1.line][cell1.column - 1] == 0:
                     state.line_forklift = cell1.line
                     state.column_forklift = cell1.column - 1
                 else:
@@ -728,7 +720,7 @@ class SearchSolver(threading.Thread):
             # Verificar se o goal é um produto, e ajustar a posição da cell2 se necessário
             cell2_content = state.matrix[cell2.line][cell2.column]
             if cell2_content == 2:
-                if state.matrix[cell2.line][cell2.column - 1] == 0:
+                if cell2.column != 0 and state.matrix[cell2.line][cell2.column - 1] == 0:
                     cell2.column -= 1
                 else:
                     cell2.column += 1
@@ -740,19 +732,25 @@ class SearchSolver(threading.Thread):
             solution = self.agent.solve_problem(problem)
 
             # Atualizar a distância do par
-            pair.distance = solution.cost
+            pair.value = solution.cost
+
+            # Adicionar a distância ao dicionário de distâncias usando as coordenadas das células
+            self.agent.distances[((pair.cell1.line, pair.cell1.column), (pair.cell2.line, pair.cell2.column))] = solution.cost
+
+            self.agent.paths[((pair.cell1.line, pair.cell1.column), (pair.cell2.line, pair.cell2.column))] = solution.obtain_all_path()
+
+            pair.solution = solution
 
             # Imprimir a distância para debugging
-            print(f"Distance for pair {pair}: {pair.distance}")
+            print(f"Distance for pair {pair}")
 
-
-        self.agent.search_method.stopped=True
+        self.agent.search_method.stopped = True
+        self.gui.text_problem.delete("1.0", "end")
+        self.gui.text_problem.insert(tk.END, "\n" + str(self.agent))
         self.gui.problem_ga = WarehouseProblemGA(self.agent)
         self.gui.manage_buttons(data_set=tk.NORMAL, runSearch=tk.DISABLED, runGA=tk.NORMAL, stop=tk.DISABLED,
                                 open_experiments=tk.NORMAL, run_experiments=tk.DISABLED, stop_experiments=tk.DISABLED,
                                 simulation=tk.DISABLED, stop_simulation=tk.DISABLED)
-        self.gui.frame.event_generate('<<AgentStopped>>', when='tail')
-
 
 class SolutionRunner(threading.Thread):
 
@@ -790,6 +788,7 @@ class SolutionRunner(threading.Thread):
                     self.state.matrix[old_cell[j].line][old_cell[j].column] = constants.FORKLIFT
 
                 # TODO put the catched products in black
+                # basicamente, contabilizar em que step é que ele apanha cada um dos produtos
+                # se tivesse nesse step, ficava a preto
             self.gui.queue.put((copy.deepcopy(self.state), step, False))
         self.gui.queue.put((None, steps, True))  # Done
-

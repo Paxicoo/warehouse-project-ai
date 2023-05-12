@@ -59,9 +59,6 @@ class IntVectorIndividual(Individual):
         # Vamos misturar os inteiros do genoma, usando o random da classe GeneticAlgorithm
         GeneticAlgorithm.rand.shuffle(self.genome)
 
-        # Print para debugging
-        print(self.genome)
-
     def swap_genes(self, other, index: int):
         aux = self.genome[index]
         self.genome[index] = other.genome[index]
