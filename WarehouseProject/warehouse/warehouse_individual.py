@@ -38,6 +38,7 @@ class WarehouseIndividual(IntVectorIndividual):
         distances = [0 for _ in range(len(agent_search.forklifts))]
 
         # TODO perguntar como colocar no painel "Best Solution" a distância total e a distância máxima
+        # TODO self.gui.text_best.insert(tk.END, "\n" + str(?????))
         # TODO perguntar quais os pesos ideais e como saber se o fitness está bom
         # TODO perguntar como colocar peso1 e peso2 no gui
         # TODO perguntar se o quadrado da saída é suposto deixar de ser azul quando um agente passa por lá
