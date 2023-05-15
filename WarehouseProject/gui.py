@@ -734,9 +734,11 @@ class SearchSolver(threading.Thread):
             pair.value = solution.cost
 
             # Adicionar a distância ao dicionário de distâncias usando as coordenadas das células
-            self.agent.distances[((pair.cell1.line, pair.cell1.column), (pair.cell2.line, pair.cell2.column))] = solution.cost
+            self.agent.distances[
+                ((pair.cell1.line, pair.cell1.column), (pair.cell2.line, pair.cell2.column))] = solution.cost
 
-            self.agent.paths[((pair.cell1.line, pair.cell1.column), (pair.cell2.line, pair.cell2.column))] = solution.obtain_all_path()
+            self.agent.paths[(
+            (pair.cell1.line, pair.cell1.column), (pair.cell2.line, pair.cell2.column))] = solution.obtain_all_path()
 
             pair.solution = solution
 
@@ -750,6 +752,7 @@ class SearchSolver(threading.Thread):
         self.gui.manage_buttons(data_set=tk.NORMAL, runSearch=tk.DISABLED, runGA=tk.NORMAL, stop=tk.DISABLED,
                                 open_experiments=tk.NORMAL, run_experiments=tk.DISABLED, stop_experiments=tk.DISABLED,
                                 simulation=tk.DISABLED, stop_simulation=tk.DISABLED)
+
 
 class SolutionRunner(threading.Thread):
 
@@ -765,6 +768,8 @@ class SolutionRunner(threading.Thread):
 
     def run(self):
         self.thread_running = True
+        self.state.line_exit = self.best_in_run.problem.agent_search.exit.line
+        self.state.column_exit = self.best_in_run.problem.agent_search.exit.column
         forklift_path, steps = self.best_in_run.obtain_all_path()
         old_cell = [None] * len(forklift_path)
         new_cells = []

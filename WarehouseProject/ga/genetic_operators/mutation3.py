@@ -12,6 +12,8 @@ class Mutation3(Mutation):
     # Pode fornecer diversidade à população sem alterar a ordem relativa dos genes dentro do subconjunto.
 
     def mutate(self, ind: IntVectorIndividual) -> None:
+
+        print("Individuo Mutacao Inicio Inversion:", ind.genome)
         num_genes = len(ind.genome)
         pos1 = GeneticAlgorithm.rand.randint(0, num_genes - 1)
         pos2 = pos1
@@ -21,6 +23,8 @@ class Mutation3(Mutation):
             pos1, pos2 = pos2, pos1
         # Inverte a ordem dos genes no subconjunto selecionado
         ind.genome[pos1:pos2+1] = reversed(ind.genome[pos1:pos2+1])
+
+        print("Individuo Mutacao Fim Inversion:", ind.genome)
 
     def __str__(self):
         return "Inversion Mutation (" + f'{self.probability}' + ")"

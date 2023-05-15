@@ -7,7 +7,8 @@ class WarehouseIndividual(IntVectorIndividual):
 
     def __init__(self, problem: "WarehouseProblemGA", num_genes: int):
         super().__init__(problem, num_genes)
-        # TODO
+        self.max_distance = 0
+        self.total_distance = 0
 
     def compute_fitness(self) -> float:
         # o fitness é a soma dos custos de cada par do genoma
@@ -23,6 +24,8 @@ class WarehouseIndividual(IntVectorIndividual):
         # print(self.fitness)
 
         self.fitness = 0
+        self.max_distance = 0
+        self.total_distance = 0
         agent_search = self.problem.agent_search
         # Número de produtos
         product_count = len(agent_search.products)
@@ -37,14 +40,15 @@ class WarehouseIndividual(IntVectorIndividual):
         # Dicionário de distâncias entre células para cada agente
         distances = [0 for _ in range(len(agent_search.forklifts))]
 
-        # TODO perguntar como colocar no painel "Best Solution" a distância total e a distância máxima
-        # TODO self.gui.text_best.insert(tk.END, "\n" + str(?????))
+
         # TODO perguntar quais os pesos ideais e como saber se o fitness está bom
-        # TODO perguntar como colocar peso1 e peso2 no gui
-        # TODO perguntar se o quadrado da saída é suposto deixar de ser azul quando um agente passa por lá
+
+        # ir experimentando, ver se o numero de passos nao aumenta muito
+
         # TODO perguntar dicas de como penalizar o fitness quando há colisão de agentes
         # TODO perguntar dicas de como por os produtos a preto quando são apanhados
         # TODO perguntar extras para além dos que estão no enunciado
+        # o numero de passos nao deve ser tao grande, dar prioridade
         pesoDistTotal = 0.5
         pesoDistMax = 0.5
 
@@ -109,19 +113,18 @@ class WarehouseIndividual(IntVectorIndividual):
             distances[agent_index] += distance_agent_to_exit
 
         # Calcular a distância total percorrida por todos os agentes
-        total_distance = sum(distances)
-        print("Total distance: ",total_distance)
+        self.total_distance = sum(distances)
+        print("Total distance: ",self.total_distance)
         # Calcular a distância máxima percorrida por um agente
-        max_distance = max(distances)
-        print("Max distance: ",max_distance)
+        self.max_distance = max(distances)
+        print("Max distance: ",self.max_distance)
         # Calcular o fitness
-        self.fitness = pesoDistTotal * total_distance + pesoDistMax * max_distance
+        self.fitness = pesoDistTotal * self.total_distance + pesoDistMax * self.max_distance
         print("Fitness: ",self.fitness)
         print("=====================================")
         return self.fitness
 
     def obtain_all_path(self):
-        # TODO
 
         # celulas todas que cada agente tem de percorrer (é uma matriz de agentes com celulas)
 
@@ -241,7 +244,8 @@ class WarehouseIndividual(IntVectorIndividual):
     def __str__(self):
         string = 'Fitness: ' + f'{self.fitness}' + '\n'
         string += str(self.genome) + "\n\n"
-        # TODO
+        string += 'Max Distance:' + f'{self.max_distance}' + '\n'
+        string += 'Total Distance:' + f'{self.total_distance}' + '\n'
         return string
 
     def better_than(self, other: "WarehouseIndividual") -> bool:
@@ -252,5 +256,7 @@ class WarehouseIndividual(IntVectorIndividual):
         new_instance = self.__class__(self.problem, self.num_genes)
         new_instance.genome = self.genome.copy()
         new_instance.fitness = self.fitness
+        new_instance.max_distance = self.max_distance
+        new_instance.total_distance = self.total_distance
         # TODO
         return new_instance

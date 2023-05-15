@@ -10,6 +10,8 @@ class MutationInsert(Mutation):
 
 
     def mutate(self, ind: IntVectorIndividual) -> None:
+        print("Inicio Mutacao Insert:", ind.genome)
+
         num_genes = len(ind.genome)
         cut1 = GeneticAlgorithm.rand.randint(0, num_genes - 1)
         cut2 = cut1
@@ -27,6 +29,8 @@ class MutationInsert(Mutation):
             ind.genome[i] = ind.genome[endCount]
             ind.genome[endCount] = aux
             endCount -= 1
+
+        print("Fim Mutacao Insert:", ind.genome)
 
 
     def __str__(self):

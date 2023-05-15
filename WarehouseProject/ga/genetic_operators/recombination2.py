@@ -13,6 +13,9 @@ class Recombination2(Recombination):
     # Em seguida, os ciclos são alternadamente copiados de cada pai para criar a descendência.
 
     def recombine(self, ind1: Individual, ind2: Individual) -> None:
+
+        print("Individuo 1 Inicio CX:", ind1.genome)
+        print("Individuo 2 Inicio CX:", ind2.genome)
         size = len(ind1.genome)
 
         # Inicia os slices como -1
@@ -49,6 +52,9 @@ class Recombination2(Recombination):
 
         ind1.genome = offspring1
         ind2.genome = offspring2
+
+        print("Individuo 1 Fim CX:", ind1.genome)
+        print("Individuo 2 Fim CX:", ind2.genome)
 
     def __str__(self):
         return "Cycle Crossover (" + f'{self.probability}' + ")"

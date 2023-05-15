@@ -23,30 +23,28 @@ class WarehouseState(State[Action]):
 
         self.line_forklift = -1
         self.column_forklift = -1
+        self.line_exit = -1
+        self.column_exit = -1
 
     def can_move_up(self) -> bool:
         return self.line_forklift > 0 and \
             self.matrix[self.line_forklift - 1][self.column_forklift] != constants.SHELF and \
-            self.matrix[self.line_forklift - 1][self.column_forklift] != constants.PRODUCT and \
-            self.matrix[self.line_forklift - 1][self.column_forklift] != constants.PRODUCT_CATCH
+            self.matrix[self.line_forklift - 1][self.column_forklift] != constants.PRODUCT
 
     def can_move_right(self) -> bool:
         return self.column_forklift < self.columns - 1 and \
             self.matrix[self.line_forklift][self.column_forklift + 1] != constants.SHELF and \
-            self.matrix[self.line_forklift][self.column_forklift + 1] != constants.PRODUCT and \
-            self.matrix[self.line_forklift][self.column_forklift + 1] != constants.PRODUCT_CATCH
+            self.matrix[self.line_forklift][self.column_forklift + 1] != constants.PRODUCT
 
     def can_move_down(self) -> bool:
         return self.line_forklift < self.rows - 1 and \
             self.matrix[self.line_forklift + 1][self.column_forklift] != constants.SHELF and \
-            self.matrix[self.line_forklift + 1][self.column_forklift] != constants.PRODUCT and \
-            self.matrix[self.line_forklift + 1][self.column_forklift] != constants.PRODUCT_CATCH
+            self.matrix[self.line_forklift + 1][self.column_forklift] != constants.PRODUCT
 
     def can_move_left(self) -> bool:
         return self.column_forklift > 0 and \
             self.matrix[self.line_forklift][self.column_forklift - 1] != constants.SHELF and \
-            self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT and \
-            self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT_CATCH
+            self.matrix[self.line_forklift][self.column_forklift - 1] != constants.PRODUCT
 
     def move_up(self) -> None:
         self.line_forklift -= 1
@@ -71,6 +69,9 @@ class WarehouseState(State[Action]):
 
     def get_cell_color(self, row: int, column: int) -> Color:
         if self.matrix[row][column] == constants.EXIT:
+            return constants.COLOREXIT
+
+        if row == self.line_exit and column == self.column_exit:
             return constants.COLOREXIT
 
         if self.matrix[row][column] == constants.PRODUCT_CATCH:
