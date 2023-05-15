@@ -22,33 +22,30 @@ class Recombination2(Recombination):
         offspring1 = [-1]*size
         offspring2 = [-1]*size
 
-        # Preenche a primeira posição do primeiro slice com o primeiro gene do primeiro pai
-        offspring1[0] = ind1.genome[0]
+        # Find cycles
+        used_indices = []
+        cycles = []
+        for i in range(size):
+            if i not in used_indices:
+                cycle = [i]
+                used_indices.append(i)
+                next_index = ind1.genome.index(ind2.genome[i])
+                while next_index != i:
+                    cycle.append(next_index)
+                    used_indices.append(next_index)
+                    next_index = ind1.genome.index(ind2.genome[next_index])
+                cycles.append(cycle)
 
-        # Pega o gene do segundo pai que está na primeira posição do primeiro pai
-        gene = ind2.genome[0]
-
-        # Continua até encontrar um ciclo
-        while gene != ind1.genome[0]:
-            index = ind1.genome.index(gene)
-            offspring1[index] = ind1.genome[index]
-            gene = ind2.genome[index]
-
-        # Preenche as posições vazias do primeiro slice com os genes do segundo pai
-        for ix in range(size):
-            if offspring1[ix] == -1:
-                offspring1[ix] = ind2.genome[ix]
-
-        # O mesmo processo para o segundo slice
-        offspring2[0] = ind2.genome[0]
-        gene = ind1.genome[0]
-        while gene != ind2.genome[0]:
-            index = ind2.genome.index(gene)
-            offspring2[index] = ind2.genome[index]
-            gene = ind1.genome[index]
-        for ix in range(size):
-            if offspring2[ix] == -1:
-                offspring2[ix] = ind1.genome[ix]
+        # Assign genes to offspring
+        for i, cycle in enumerate(cycles):
+            if i % 2 == 0:
+                for index in cycle:
+                    offspring1[index] = ind1.genome[index]
+                    offspring2[index] = ind2.genome[index]
+            else:
+                for index in cycle:
+                    offspring1[index] = ind2.genome[index]
+                    offspring2[index] = ind1.genome[index]
 
         ind1.genome = offspring1
         ind2.genome = offspring2

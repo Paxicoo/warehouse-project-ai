@@ -114,14 +114,10 @@ class WarehouseIndividual(IntVectorIndividual):
 
         # Calcular a distância total percorrida por todos os agentes
         self.total_distance = sum(distances)
-        print("Total distance: ",self.total_distance)
         # Calcular a distância máxima percorrida por um agente
         self.max_distance = max(distances)
-        print("Max distance: ",self.max_distance)
         # Calcular o fitness
         self.fitness = pesoDistTotal * self.total_distance + pesoDistMax * self.max_distance
-        print("Fitness: ",self.fitness)
-        print("=====================================")
         return self.fitness
 
     def obtain_all_path(self):
