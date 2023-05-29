@@ -10,3 +10,6 @@ class Cell:
 
     def __str__(self) -> str:
         return f"{self.line}-{self.column}"
+
+    def __hash__(self):
+        return hash((self.line, self.column))

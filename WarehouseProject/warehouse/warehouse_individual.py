@@ -1,3 +1,4 @@
+import collections
 import copy
 
 from ga.individual_int_vector import IntVectorIndividual
@@ -9,6 +10,7 @@ class WarehouseIndividual(IntVectorIndividual):
         super().__init__(problem, num_genes)
         self.max_distance = 0
         self.total_distance = 0
+        self.number_of_collisions = 0
 
     def compute_fitness(self) -> float:
         # o fitness é a soma dos custos de cada par do genoma
@@ -118,6 +120,15 @@ class WarehouseIndividual(IntVectorIndividual):
         self.max_distance = max(distances)
         # Calcular o fitness
         self.fitness = pesoDistTotal * self.total_distance + pesoDistMax * self.max_distance
+
+        # Obtain paths for all agents
+        #forklift_paths, max_steps= self.obtain_all_path()
+
+        # Detect collisions and penalize fitness
+        #collision_penalty = 0.1  # Define a penalty constant
+        #number_of_collisions = self.detect_collisions(forklift_paths)  # Get the number of collisions
+        #self.fitness += self.fitness*(collision_penalty * number_of_collisions)  # Penalize fitness for each collision
+
         return self.fitness
 
     def obtain_all_path(self):
@@ -234,14 +245,49 @@ class WarehouseIndividual(IntVectorIndividual):
             if len(path) > max_steps:
                 max_steps = len(path)
 
-        print(max_steps)
         return forklift_paths, max_steps
+
+    # Função que deteta as colisões entre agentes
+    def detect_collisions(self, forklift_paths):
+        # Initialize a counter for collisions
+        collisions = 0
+
+        # Go through each time step
+        max_steps = max(len(path) for path in forklift_paths)  # Maximum steps any forklift takes
+
+        for step in range(max_steps):
+
+            # Initialize an empty list to store the positions of forklifts at the current step
+            positions = []
+
+            # Now we go through each forklift's path
+            for path in forklift_paths:
+
+                # If the current step is within the length of the forklift's path, this means the forklift is still moving
+                if step < len(path):
+                    # We add the position of the forklift at the current step to the positions list
+                    positions.append((path[step].line, path[step].column))
+
+            # We use a Counter to count how many times each position occurs in the positions list
+            position_counts = collections.Counter(positions)
+
+            # We go through each value (count) in the position_counts dictionary
+            for count in position_counts.values():
+
+                # If a count is greater than 1, this means that more than one forklift is in the same position
+                # This is a collision, so we increment the collisions counter
+                if count > 1:
+                    collisions += 1
+
+        # Once we have checked all steps and all paths, we return the total number of collisions
+        return collisions
 
     def __str__(self):
         string = 'Fitness: ' + f'{self.fitness}' + '\n'
         string += str(self.genome) + "\n\n"
         string += 'Max Distance:' + f'{self.max_distance}' + '\n'
         string += 'Total Distance:' + f'{self.total_distance}' + '\n'
+        string += 'Number of Collisions:' + f'{self.number_of_collisions}' + '\n'
         return string
 
     def better_than(self, other: "WarehouseIndividual") -> bool:
@@ -254,5 +300,6 @@ class WarehouseIndividual(IntVectorIndividual):
         new_instance.fitness = self.fitness
         new_instance.max_distance = self.max_distance
         new_instance.total_distance = self.total_distance
+        new_instance.number_of_collisions = self.number_of_collisions
         # TODO
         return new_instance
