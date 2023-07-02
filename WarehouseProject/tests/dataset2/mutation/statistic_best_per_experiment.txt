@@ -1,0 +1,378 @@
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Inversion Mutation (0.1)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Inversion Mutation (0.2)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Inversion Mutation (0.3)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Inversion Mutation (0.4)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Inversion Mutation (0.5)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Inversion Mutation (0.6)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Inversion Mutation (0.7)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Inversion Mutation (0.8)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Inversion Mutation (0.9)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Swap Mutation (0.1)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Swap Mutation (0.2)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Swap Mutation (0.3)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Swap Mutation (0.4)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Swap Mutation (0.5)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Swap Mutation (0.6)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Swap Mutation (0.7)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Swap Mutation (0.8)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Swap Mutation (0.9)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Insert Mutation (0.1)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Insert Mutation (0.2)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Insert Mutation (0.3)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Insert Mutation (0.4)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Insert Mutation (0.5)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Insert Mutation (0.6)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Insert Mutation (0.7)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Insert Mutation (0.8)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 10
+Selection: Tournament selection(2)
+Recombination: Order Crossover (0.8)
+Mutation:Insert Mutation (0.9)
+Fitness: 18.5
+[4, 5, 3, 2, 1]
+
+Max Distance:15
+Total Distance:22
+
+
+# --------------------------------------------------------------

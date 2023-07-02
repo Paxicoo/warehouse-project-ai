@@ -9,8 +9,6 @@ class RecombinationPMX(Recombination):
         super().__init__(probability)
 
     def recombine(self, ind1: Individual, ind2: Individual) -> None:
-        print("Individuo 1 Inicio PMX:", ind1.genome)
-        print("Individuo 2 Inicio PMX:", ind2.genome)
         num_genes = ind1.num_genes
         cut1 = GeneticAlgorithm.rand.randint(0, num_genes - 1)
         cut2 = GeneticAlgorithm.rand.randint(0, num_genes - 1)
@@ -48,8 +46,6 @@ class RecombinationPMX(Recombination):
 
         ind1.genome = child2
         ind2.genome = child1
-        print("Individuo 1 Fim PMX:", ind1.genome)
-        print("Individuo 2 Fim PMX:", ind2.genome)
 
     def __str__(self):
         return "PMX recombination (" + f'{self.probability}' + ")"

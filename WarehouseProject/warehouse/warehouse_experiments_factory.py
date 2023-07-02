@@ -1,18 +1,21 @@
+import copy
+
 from experiments.experiments_factory import ExperimentsFactory
 from experiments.experiment import Experiment
 from experiments.experiment_listener import ExperimentListener
-from ga.genetic_operators.mutation3 import Mutation3
-from ga.genetic_operators.mutation2 import Mutation2
-from ga.selection_methods.tournament import Tournament
-from ga.genetic_operators.recombination2 import Recombination2
-from ga.genetic_operators.recombination_pmx import RecombinationPMX
-from ga.genetic_operators.recombination3 import Recombination3
 from ga.genetic_operators.mutation_insert import MutationInsert
+from ga.genetic_operators.mutation_swap import MutationSwap
+from ga.selection_methods.tournament import Tournament
+from ga.genetic_operators.recombination_cx import RecombinationCX
+from ga.genetic_operators.recombination_pmx import RecombinationPMX
+from ga.genetic_operators.recombination_ox import RecombinationOX
+from ga.genetic_operators.mutation_inversion import MutationInversion
 from ga.genetic_algorithm import GeneticAlgorithm
 from experiments_statistics.statistic_best_in_run import StatisticBestInRun
 from experiments_statistics.statistic_best_average import StatisticBestAverage
 from warehouse.warehouse_agent_search import read_state_from_txt_file, WarehouseAgentSearch
 from warehouse.warehouse_problemforGA import WarehouseProblemGA
+from warehouse.warehouse_problemforSearch import WarehouseProblemSearch
 from warehouse.warehouse_state import WarehouseState
 
 
@@ -44,26 +47,26 @@ class WarehouseExperimentsFactory(ExperimentsFactory):
         match self.get_parameter_value('Recombination'):
             case 'pmx':
                 self.recombination_method = RecombinationPMX(recombination_probability)
-            case 'recombination2':
-                self.recombination_method = Recombination2(recombination_probability)
-            case 'recombination3':
-                self.recombination_method = Recombination3(recombination_probability)
+            case 'cx':
+                self.recombination_method = RecombinationCX(recombination_probability)
+            case 'ox':
+                self.recombination_method = RecombinationOX(recombination_probability)
 
         # MUTATION
         mutation_probability = float(self.get_parameter_value('Mutation_probability'))
         match self.get_parameter_value('Mutation'):
+            case 'inversion':
+                self.mutation_method = MutationInversion(mutation_probability)
+            case 'swap':
+                self.mutation_method = MutationSwap(mutation_probability)
             case 'insert':
                 self.mutation_method = MutationInsert(mutation_probability)
-            case 'mutation2':
-                self.mutation_method = Mutation2(mutation_probability)
-            case 'mutation3':
-                self.mutation_method = Mutation3(mutation_probability)
 
         # PROBLEM
         matrix, num_rows, num_columns = read_state_from_txt_file(self.get_parameter_value("Problem_file"))
 
         agent_search = WarehouseAgentSearch(WarehouseState(matrix, num_rows, num_columns))
-        # TODO calculate pair distances
+        self.calculate_distances(agent_search)
         self.problem = WarehouseProblemGA(agent_search)
 
         experiment_textual_representation = self.build_experiment_textual_representation()
@@ -100,6 +103,51 @@ class WarehouseExperimentsFactory(ExperimentsFactory):
             ga.add_listener(statistic)
 
         return ga
+
+    def calculate_distances(self, agent):
+        for pair in agent.pairs:
+            # Fazer uma cópia das células do par
+            cell1 = copy.copy(pair.cell1)
+            cell2 = copy.copy(pair.cell2)
+
+            # Atualizar o estado inicial com a posição da forklift na cell1
+            state = copy.copy(agent.initial_environment)
+
+            # Verificar se a cell1 é um produto, e ajustar a posição do agente se necessário
+            cell1_content = state.matrix[cell1.line][cell1.column]
+            if cell1_content == 2:
+                if cell1.column != 0 and state.matrix[cell1.line][cell1.column - 1] == 0:
+                    state.line_forklift = cell1.line
+                    state.column_forklift = cell1.column - 1
+                else:
+                    state.line_forklift = cell1.line
+                    state.column_forklift = cell1.column + 1
+            else:
+                state.line_forklift = cell1.line
+                state.column_forklift = cell1.column
+
+            # Verificar se o goal é um produto, e ajustar a posição da cell2 se necessário
+            cell2_content = state.matrix[cell2.line][cell2.column]
+            if cell2_content == 2:
+                if cell2.column != 0 and state.matrix[cell2.line][cell2.column - 1] == 0:
+                    cell2.column -= 1
+                else:
+                    cell2.column += 1
+
+            # Criar uma instância da classe WarehouseProblemSearch com o estado inicial atualizado e a posição da porta
+            problem = WarehouseProblemSearch(state, cell2)
+
+            # Resolver o problema
+            solution = agent.solve_problem(problem)
+
+            # Atualizar a distância do par
+            pair.value = solution.cost
+
+            # Adicionar a distância ao dicionário de distâncias usando as coordenadas das células
+            agent.distances[
+                ((pair.cell1.line, pair.cell1.column), (pair.cell2.line, pair.cell2.column))] = solution.cost
+
+            pair.solution = solution
 
     def build_statistic(self, statistic_name: str, experiment_header: str) -> ExperimentListener:
         if statistic_name == 'BestIndividual':

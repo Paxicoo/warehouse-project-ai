@@ -2,7 +2,7 @@ from ga.genetic_algorithm import GeneticAlgorithm
 from ga.genetic_operators.recombination import Recombination
 from ga.individual import Individual
 
-class Recombination3(Recombination):
+class RecombinationOX(Recombination):
 
     def __init__(self, probability: float):
         super().__init__(probability)
@@ -15,8 +15,6 @@ class Recombination3(Recombination):
     # mantendo a sua ordem original.
 
     def recombine(self, ind1: Individual, ind2: Individual) -> None:
-        print("Individuo 1 Inicio OX:", ind1.genome)
-        print("Individuo 2 Inicio OX:", ind2.genome)
         size = len(ind1.genome)
         # Escolhe dois pontos aleatórios para o slice.
         start, end = sorted([GeneticAlgorithm.rand.randint(0, size - 1) for _ in range(2)])
@@ -42,7 +40,5 @@ class Recombination3(Recombination):
         ind1.genome = offspring1
         ind2.genome = offspring2
 
-        print("Individuo 1 Fim OX:", ind1.genome)
-        print("Individuo 2 Fim OX:", ind2.genome)
     def __str__(self):
         return "Order Crossover (" + f'{self.probability}' + ")"

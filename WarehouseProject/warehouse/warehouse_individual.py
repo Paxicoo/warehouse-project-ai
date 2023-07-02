@@ -43,13 +43,9 @@ class WarehouseIndividual(IntVectorIndividual):
         distances = [0 for _ in range(len(agent_search.forklifts))]
 
 
-        # TODO perguntar quais os pesos ideais e como saber se o fitness está bom
-
         # ir experimentando, ver se o numero de passos nao aumenta muito
 
-        # TODO perguntar dicas de como penalizar o fitness quando há colisão de agentes
-        # TODO perguntar dicas de como por os produtos a preto quando são apanhados
-        # TODO perguntar extras para além dos que estão no enunciado
+
         # o numero de passos nao deve ser tao grande, dar prioridade
         pesoDistTotal = 0.5
         pesoDistMax = 0.5
@@ -125,7 +121,7 @@ class WarehouseIndividual(IntVectorIndividual):
         #forklift_paths, max_steps= self.obtain_all_path()
 
         # Detect collisions and penalize fitness
-        #collision_penalty = 0.1  # Define a penalty constant
+        #collision_penalty = 1.5  # Define a penalty constant
         #number_of_collisions = self.detect_collisions(forklift_paths)  # Get the number of collisions
         #self.fitness += self.fitness*(collision_penalty * number_of_collisions)  # Penalize fitness for each collision
 
@@ -149,7 +145,7 @@ class WarehouseIndividual(IntVectorIndividual):
         # adaptar a class solution (gui) devolver as celulas percorridas por uma solução
         # depois guardar em cada par essas celulas, depois aqui consoante a solução, temos o genoma
         # vamos buscar as celulas todas para concatenar e depois devolver o caminho total
-        # tem que dar return do caminho total, para depois na gui desenhar o caminho todo
+        # tem que dar return do caminho total, para depois na gui desenhar o caminho total
 
         agent_search = self.problem.agent_search
         product_count = len(agent_search.products)
@@ -161,7 +157,6 @@ class WarehouseIndividual(IntVectorIndividual):
         path = []
         # Número maximo de passos que o agente pode dar
         max_steps = 0
-
         # Vamos percorrer o genoma
         for i, genome_value in enumerate(self.genome):
 
@@ -287,7 +282,6 @@ class WarehouseIndividual(IntVectorIndividual):
         string += str(self.genome) + "\n\n"
         string += 'Max Distance:' + f'{self.max_distance}' + '\n'
         string += 'Total Distance:' + f'{self.total_distance}' + '\n'
-        string += 'Number of Collisions:' + f'{self.number_of_collisions}' + '\n'
         return string
 
     def better_than(self, other: "WarehouseIndividual") -> bool:
@@ -301,5 +295,4 @@ class WarehouseIndividual(IntVectorIndividual):
         new_instance.max_distance = self.max_distance
         new_instance.total_distance = self.total_distance
         new_instance.number_of_collisions = self.number_of_collisions
-        # TODO
         return new_instance

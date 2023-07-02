@@ -14,7 +14,6 @@ class WarehouseState(State[Action]):
 
     def __init__(self, matrix: ndarray, rows, columns):
         super().__init__()
-        # TODO
 
         self.rows = rows
         self.columns = columns

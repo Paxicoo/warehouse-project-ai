@@ -1,30 +1,30 @@
-Runs: 2
+Runs: 30
 
-Population_size: 100
+Population_size: 50, 100, 200
 
-Max_generations: 100
+Max_generations: 10
 
 # --------------------------------
 
 Selection: tournament
 
-Tournament_size: 2, 4
+Tournament_size: 2, 4, 6
 
 # --------------------------------
 
-Recombination: pmx
+Recombination: pmx, cx, ox
 
-Recombination_probability: 0.7
-
-# --------------------------------
-
-Mutation: insert
-
-Mutation_probability: 0.1
+Recombination_probability: 0.7, 0.8, 0.85
 
 # --------------------------------
 
-Problem_file: ./data_sets/problem3.txt
+Mutation: inversion, swap, insert
+
+Mutation_probability: 0.1, 0.2, 0.3
+
+# --------------------------------
+
+Problem_file: ./data_sets/problem2.txt
 
 # --------------------------------
 

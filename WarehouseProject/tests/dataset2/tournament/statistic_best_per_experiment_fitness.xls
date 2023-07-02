@@ -1,0 +1,6 @@
+Population size:	Max generations: 	Selection: 	Recombination: 	Mutation:		Fitness:
+50	10	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+50	10	Tournament selection(4)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+50	10	Tournament selection(6)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+50	10	Tournament selection(8)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+50	10	Tournament selection(10)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5

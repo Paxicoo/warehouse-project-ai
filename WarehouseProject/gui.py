@@ -10,13 +10,13 @@ import queue
 import threading
 
 import constants
-from ga.genetic_operators.mutation2 import Mutation2
-from ga.genetic_operators.mutation3 import Mutation3
-from ga.genetic_operators.recombination3 import Recombination3
-from ga.selection_methods.tournament import Tournament
-from ga.genetic_operators.recombination2 import Recombination2
-from ga.genetic_operators.recombination_pmx import RecombinationPMX
+from ga.genetic_operators.mutation_swap import MutationSwap
 from ga.genetic_operators.mutation_insert import MutationInsert
+from ga.genetic_operators.recombination_ox import RecombinationOX
+from ga.selection_methods.tournament import Tournament
+from ga.genetic_operators.recombination_cx import RecombinationCX
+from ga.genetic_operators.recombination_pmx import RecombinationPMX
+from ga.genetic_operators.mutation_inversion import MutationInversion
 from ga.genetic_algorithm_thread import GeneticAlgorithmThread
 from warehouse.warehouse_agent_search import WarehouseAgentSearch, read_state_from_txt_file
 from warehouse.warehouse_experiments_factory import WarehouseExperimentsFactory
@@ -315,14 +315,14 @@ class Window(tk.Tk):
         recombination_methods_index = self.combo_recombination_methods.current()
         recombination_method = RecombinationPMX(
             float(self.entry_recombination_prob.get())) if recombination_methods_index == 0 else \
-            Recombination2(float(self.entry_recombination_prob.get())) if recombination_methods_index == 1 else \
-                Recombination3(float(self.entry_recombination_prob.get()))
+            RecombinationCX(float(self.entry_recombination_prob.get())) if recombination_methods_index == 1 else \
+                RecombinationOX(float(self.entry_recombination_prob.get()))
 
         mutation_methods_index = self.combo_mutation_methods.current()
-        mutation_method = MutationInsert(
+        mutation_method = MutationInversion(
             float(self.entry_mutation_prob.get())) if mutation_methods_index == 0 else \
-            Mutation2(float(self.entry_mutation_prob.get())) if mutation_methods_index == 1 else \
-                Mutation3(float(self.entry_mutation_prob.get()))
+            MutationSwap(float(self.entry_mutation_prob.get())) if mutation_methods_index == 1 else \
+                MutationInsert(float(self.entry_mutation_prob.get()))
 
         self.genetic_algorithm = GeneticAlgorithmThread(
             int(self.entry_seed.get()),
@@ -615,7 +615,6 @@ class SearchSolver(threading.Thread):
         self.agent.stop()
 
     def run(self):
-        # TODO calculate pairs distances
         # calcular os pares
 
         # para cada par, definir
@@ -743,7 +742,7 @@ class SearchSolver(threading.Thread):
             pair.solution = solution
 
             # Imprimir a distância para debugging
-            print(f"Distance for pair {pair}")
+            #print(f"Distance for pair {pair}")
 
         self.agent.search_method.stopped = True
         self.gui.text_problem.delete("1.0", "end")

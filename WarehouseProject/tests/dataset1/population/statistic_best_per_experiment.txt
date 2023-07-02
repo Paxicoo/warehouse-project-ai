@@ -1,0 +1,224 @@
+
+Population size: 2
+Max generations: 125
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 2
+Max generations: 25
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 2
+Max generations: 5
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 2
+Max generations: 1
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 10
+Max generations: 125
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 10
+Max generations: 25
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 10
+Max generations: 5
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 10
+Max generations: 1
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 125
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 25
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 5
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 50
+Max generations: 1
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 250
+Max generations: 125
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 250
+Max generations: 25
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 250
+Max generations: 5
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------
+
+Population size: 250
+Max generations: 1
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.7)
+Mutation:Inversion Mutation (0.1)
+Fitness: 14.0
+[3, 2, 1]
+
+Max Distance:14
+Total Distance:14
+
+
+# --------------------------------------------------------------

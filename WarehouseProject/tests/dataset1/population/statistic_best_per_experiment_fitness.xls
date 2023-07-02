@@ -1,0 +1,17 @@
+Population size:	Max generations: 	Selection: 	Recombination: 	Mutation:		Fitness:
+2	125	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+2	25	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+2	5	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+2	1	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+10	125	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+10	25	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+10	5	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+10	1	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+50	125	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+50	25	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+50	5	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+50	1	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+250	125	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+250	25	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+250	5	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0
+250	1	Tournament selection(2)	PMX recombination (0.7)	Inversion Mutation (0.1)		14.0

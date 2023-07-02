@@ -1,0 +1,26 @@
+Population size:	Max generations: 	Selection: 	Recombination: 	Mutation:		Fitness:
+10	50	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+10	25	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+10	10	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+10	5	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+10	2	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+20	50	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+20	25	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+20	10	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+20	5	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+20	2	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+50	50	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+50	25	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+50	10	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+50	5	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+50	2	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+100	50	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+100	25	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+100	10	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+100	5	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+100	2	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+250	50	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+250	25	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+250	10	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+250	5	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5
+250	2	Tournament selection(2)	Order Crossover (0.8)	Swap Mutation (0.2)		18.5

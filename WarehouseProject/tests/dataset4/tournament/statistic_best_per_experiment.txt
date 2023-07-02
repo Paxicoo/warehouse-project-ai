@@ -1,0 +1,70 @@
+
+Population size: 200
+Max generations: 50
+Selection: Tournament selection(2)
+Recombination: PMX recombination (0.8)
+Mutation:Insert Mutation (0.3)
+Fitness: 250.0
+[2, 19, 27, 35, 32, 7, 4, 30, 10, 41, 29, 9, 24, 22, 12, 11, 38, 33, 20, 37, 40, 5, 8, 16, 15, 14, 6, 3, 28, 36, 39, 26, 18, 17, 34, 21, 1, 25, 13, 31, 23]
+
+Max Distance:105
+Total Distance:395
+
+
+# --------------------------------------------------------------
+
+Population size: 200
+Max generations: 50
+Selection: Tournament selection(4)
+Recombination: PMX recombination (0.8)
+Mutation:Insert Mutation (0.3)
+Fitness: 143.0
+[6, 12, 14, 10, 9, 2, 1, 18, 22, 19, 27, 36, 40, 24, 34, 17, 21, 26, 29, 41, 35, 28, 25, 13, 3, 4, 7, 31, 30, 39, 11, 5, 8, 16, 15, 20, 33, 38, 37, 32, 23]
+
+Max Distance:67
+Total Distance:219
+
+
+# --------------------------------------------------------------
+
+Population size: 200
+Max generations: 50
+Selection: Tournament selection(6)
+Recombination: PMX recombination (0.8)
+Mutation:Insert Mutation (0.3)
+Fitness: 132.5
+[10, 3, 1, 2, 9, 13, 23, 40, 17, 21, 24, 34, 35, 27, 36, 18, 22, 19, 28, 25, 26, 41, 29, 38, 33, 20, 16, 15, 7, 11, 30, 31, 39, 14, 12, 6, 4, 5, 8, 32, 37]
+
+Max Distance:58
+Total Distance:207
+
+
+# --------------------------------------------------------------
+
+Population size: 200
+Max generations: 50
+Selection: Tournament selection(8)
+Recombination: PMX recombination (0.8)
+Mutation:Insert Mutation (0.3)
+Fitness: 133.5
+[9, 6, 14, 12, 28, 25, 32, 37, 41, 26, 29, 39, 4, 11, 7, 5, 8, 20, 15, 16, 33, 38, 23, 30, 31, 40, 18, 19, 22, 35, 27, 13, 10, 3, 1, 2, 17, 21, 24, 34, 36]
+
+Max Distance:70
+Total Distance:197
+
+
+# --------------------------------------------------------------
+
+Population size: 200
+Max generations: 50
+Selection: Tournament selection(10)
+Recombination: PMX recombination (0.8)
+Mutation:Insert Mutation (0.3)
+Fitness: 130.5
+[1, 2, 9, 10, 3, 6, 23, 26, 41, 29, 37, 32, 11, 4, 7, 25, 28, 39, 5, 8, 20, 16, 15, 33, 38, 30, 31, 40, 17, 24, 34, 21, 13, 12, 14, 19, 18, 22, 27, 35, 36]
+
+Max Distance:56
+Total Distance:205
+
+
+# --------------------------------------------------------------
